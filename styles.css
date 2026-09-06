@@ -1954,6 +1954,47 @@ a {
   display: block;
 }
 
+/* PNEI Title Word & Multicolor Breakdown */
+.pnei-title-word {
+  display: inline-block;
+  font-size: clamp(0.95rem, 2.2vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.pnei-part {
+  display: inline;
+}
+
+.pnei-psico {
+  color: #0284C7; /* Azul Psique */
+}
+
+.pnei-neuro {
+  color: #D97706; /* Ámbar / Dorado Sistema Nervioso */
+}
+
+.pnei-endocri {
+  color: #059669; /* Verde Esmeralda Sistema Endocrino */
+}
+
+.pnei-inmuno {
+  color: #7C3AED; /* Violeta / Púrpura Sistema Inmune */
+}
+
+.pnei-logia {
+  color: #1E292B; /* Negro / Oscuro */
+}
+
+@media (max-width: 600px) {
+  .pnei-title-word {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: clamp(0.8rem, 4.4vw, 1.15rem);
+  }
+}
+
 /* PNEI Holistic Card */
 .pnei-card {
   background: linear-gradient(135deg, #FFFFFF 0%, #F0F6F5 100%);
@@ -2058,10 +2099,10 @@ a {
 }
 
 
-/* ==========================================================================
-   RESPONSIVE MEDIA QUERIES
-   ========================================================================== */
 @media (max-width: 1200px) {
+  :root {
+    --header-height: 72px;
+  }
 
   /* Navigation mobile / dropdown behavior (triggers earlier to prevent overlapping) */
   .menu-toggle {
@@ -2074,20 +2115,25 @@ a {
     left: 0;
     width: 100%;
     height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
+    max-height: calc(100dvh - var(--header-height));
     background-color: var(--bg-card);
     z-index: 1050;
-    padding: 3rem 1.5rem;
+    padding: clamp(1rem, 2.5vh, 2rem) 1.5rem clamp(1.5rem, 3.5vh, 2.5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
+    justify-content: center;
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-      opacity 0.4s ease,
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.35s ease,
       visibility 0s linear 0.4s;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
     border-top: 1px solid var(--border-color);
   }
 
@@ -2095,36 +2141,75 @@ a {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
-      opacity 0.4s ease,
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.35s ease,
       visibility 0s linear 0s;
   }
 
   .nav-links {
     flex-direction: column;
-    gap: 2rem;
+    gap: clamp(0.5rem, 1.8vh, 1.25rem);
     width: 100%;
+    max-width: 380px;
+    height: 100%;
+    max-height: 520px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     text-align: center;
-    margin-left: 0;
-    justify-content: center;
+    margin: auto;
+    padding: 0.5rem 0;
+    list-style: none;
   }
 
   .nav-links li {
     width: 100%;
+    display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .nav-link {
-    font-size: var(--fs-md);
-    display: block;
+    font-size: clamp(1.05rem, 2.3vh, 1.25rem);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 0.75rem 0;
+    padding: clamp(0.7rem, 1.6vh, 0.95rem) 1.5rem;
+    border-radius: var(--border-radius-md);
+    color: var(--text-dark);
+    background-color: transparent;
+    transition: var(--transition-smooth);
+    border: 1px solid transparent;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-link:hover {
+    background-color: var(--accent-bg);
+    color: var(--primary);
+    transform: translateY(-1px);
+  }
+
+  .nav-link:active {
+    transform: scale(0.98);
+  }
+
+  .nav-link.active {
+    background-color: rgba(14, 74, 76, 0.07);
+    color: var(--primary);
+    font-weight: 700;
+    border-color: rgba(14, 74, 76, 0.12);
   }
 
   .nav-cta {
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
     justify-content: center;
+    margin-top: 0.5rem;
   }
 
   .nav-cta .btn {
